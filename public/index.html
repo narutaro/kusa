@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs -->
+  <meta charset="utf-8">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css" />
+
+</head>
+<body>
+
+  <!-- Primary Page Layout -->
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 25%">
+        <h4>The grass is always greener on the other side</h4>
+        <!-- <p><a href="http://www.getskeleton.com">Skeleton documentation</a>.</p> -->
+      </div>
+      <div class="one-half column" style="margin-top: 25%">
+        <p>隣の芝生は青く見えるものです</p>
+      </div>
+      <div class="twelve columns">
+        <div id="cal-heatmap"></div>
+          <script type="text/javascript">
+          	var cal = new CalHeatMap();
+	          cal.init({
+              domain: "month",
+              data: "data.json",
+              tooltip: true
+            });
+          </script>
+      </div>
+    </div>
+  </div>
+
+<!-- End Document -->
+</body>
+</html>
