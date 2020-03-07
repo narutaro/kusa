@@ -25,29 +25,56 @@
   <script type="text/javascript" src="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css" />
 
+  <script>
+
+    var url = "https://****.firebaseio.com/user1.json"
+
+    function epoch() {
+      var date = new Date() ;
+      return Math.floor( date.getTime() / 1000 ) ;
+    }
+    var data = '{"' + epoch() + '"' + ':1}'
+    var data = JSON.parse(data);
+
+    function go(url, data) {
+      fetch(url, {
+        method: 'PATCH', 
+        body: JSON.stringify(data), 
+        //body: data, 
+        headers:{ 'Content-Type': 'application/json' }
+      }).then(res => res.json())
+      .then(response => console.log('Success:', JSON.stringify(response)))
+      .catch(error => console.error('Error:', error));
+    }
+
+  </script>
+
 </head>
 <body>
 
   <!-- Primary Page Layout -->
   <div class="container">
     <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
+      <div class="twelve columns" style="margin-top: 25%">
         <h4>The grass is always greener on the other side</h4>
         <!-- <p><a href="http://www.getskeleton.com">Skeleton documentation</a>.</p> -->
-      </div>
-      <div class="one-half column" style="margin-top: 25%">
-        <p>隣の芝生は青く見えるものです</p>
       </div>
       <div class="twelve columns">
         <div id="cal-heatmap"></div>
           <script type="text/javascript">
+
           	var cal = new CalHeatMap();
 	          cal.init({
               domain: "month",
-              data: "data.json",
+              //data: "date.json",
+              data: url,
               tooltip: true
             });
+
           </script>
+      </div>
+      <div class="twelve columns" style="margin-top:30px">
+        <input type="button" value="done" onclick="go(url, data)">
       </div>
     </div>
   </div>
