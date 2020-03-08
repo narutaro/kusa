@@ -25,16 +25,21 @@
   <script type="text/javascript" src="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css" />
 
-  <script>
+  <!-- Application configuration -->
+  <script type="text/javascript" src=".app_config.js"></script>
 
-    var url = "https://****.firebaseio.com/user1.json"
+  <script>
+    var url = conf.url
 
     function epoch() {
       var date = new Date() ;
       return Math.floor( date.getTime() / 1000 ) ;
     }
-    var data = '{"' + epoch() + '"' + ':1}'
-    var data = JSON.parse(data);
+
+    function createData() {
+      var data = '{"' + epoch() + '"' + ':1}'
+      return JSON.parse(data);
+    }
 
     function go(url, data) {
       fetch(url, {
@@ -52,10 +57,25 @@
 </head>
 <body>
 
+<div class="container">
+ <div class="four columns">
+   <h1>KUSA</h1>
+ </div>
+ 
+ <div id="nav" class="six columns">
+   <ul>
+     <li><a href="#">Home</a></li>
+     <li><a href="#">About</a></li>
+     <li><a href="#">Portfolio</a></li>
+     <li><a href="#">Contact</a></li>
+   </ul>
+ </div>
+</div><!-- container -->
+
   <!-- Primary Page Layout -->
   <div class="container">
     <div class="row">
-      <div class="twelve columns" style="margin-top: 25%">
+      <div class="twelve columns" style="">
         <h4>The grass is always greener on the other side</h4>
         <!-- <p><a href="http://www.getskeleton.com">Skeleton documentation</a>.</p> -->
       </div>
@@ -65,7 +85,18 @@
 
           	var cal = new CalHeatMap();
 	          cal.init({
+              cellSize: 15,
               domain: "month",
+              domainGutter: 0,
+              domainMargin: 0,
+              weekStartOnMonday: false,
+/*
+              verticalOrientation: true,
+              legendOrientation: "vertical",
+              legendHorizontalPosition: "right",
+              legendVerticalPosition: "center",
+              legendMargin: [0, 0, 0, 20],
+*/
               //data: "date.json",
               data: url,
               tooltip: true
@@ -74,11 +105,36 @@
           </script>
       </div>
       <div class="twelve columns" style="margin-top:30px">
-        <input type="button" value="done" onclick="go(url, data)">
+        <input type="button" value="done" onclick="go(url, createData()); cal.update(url)">
+        <!-- <input type="button" value="done" onclick="go(url, createData());"> -->
       </div>
     </div>
   </div>
 
 <!-- End Document -->
 </body>
+
+<style>
+.container {
+ margin-top: 50px;
+}
+ 
+#nav {
+ margin: 13px 0 0 0;
+}
+ 
+#nav ul li {
+ display: inline;
+ margin: 0 20px 0 0;
+ margin-bottom: 130px;
+}
+ 
+#nav a {
+ text-decoration: none;
+}
+ 
+#nav a:hover {
+ text-decoration: underline;
+}
+</style>
 </html>
