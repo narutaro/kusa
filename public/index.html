@@ -28,7 +28,12 @@
   <!-- Application configuration -->
   <script type="text/javascript" src=".app_config.js"></script>
 
+  <!-- Fontawsome -->
+  <script src="https://kit.fontawesome.com/a1763a7d6f.js" crossorigin="anonymous"></script>
+
+
   <script>
+
     var url = conf.url
 
     function epoch() {
@@ -52,17 +57,34 @@
       .catch(error => console.error('Error:', error));
     }
 
+    const d = new Date();
+    let threeMonthAgo = d.setMonth(d.getMonth() - 2);
+
   </script>
 
 </head>
 <body>
 
-<div class="container">
- <div class="four columns">
+<div class="container" style="margin-top: 40px;">
+  <div class="row">
+    <div class="twelve columns"><img src="img/kusa-h40.png"></img></div>
+    <div class="twelve columns" style="padding: 10px"><p> The grass is always greener on the other side</p></div>
+<!--
+    <div class="one columns">
+      <span class="u-pull-right" style="font-size: 2em">
+        <i class="fas fa-bars"></i>
+      </span>
+    </div>
+-->
+  </div>
+</div>
+
+<!--
+<div class="row">
+ <div class="three columns">
    <h1>KUSA</h1>
  </div>
- 
- <div id="nav" class="six columns">
+ <div id="nav" class="seven columns">
    <ul>
      <li><a href="#">Home</a></li>
      <li><a href="#">About</a></li>
@@ -70,21 +92,28 @@
      <li><a href="#">Contact</a></li>
    </ul>
  </div>
+ <div class="nine columns">
+   <span class="u-pull-right" style="font-size: 2em">
+     <i class="fas fa-bars"></i>
+   </span>
+ </div>
+-->
+
+</div>
+ 
 </div><!-- container -->
 
   <!-- Primary Page Layout -->
-  <div class="container">
+  <div class="container" style="margin-top: 40px;">
     <div class="row">
-      <div class="twelve columns" style="">
-        <h4>The grass is always greener on the other side</h4>
-        <!-- <p><a href="http://www.getskeleton.com">Skeleton documentation</a>.</p> -->
-      </div>
       <div class="twelve columns">
         <div id="cal-heatmap"></div>
           <script type="text/javascript">
 
           	var cal = new CalHeatMap();
 	          cal.init({
+              start: threeMonthAgo,
+              range: 3,
               cellSize: 15,
               domain: "month",
               domainGutter: 0,
@@ -104,8 +133,8 @@
 
           </script>
       </div>
-      <div class="twelve columns" style="margin-top:30px">
-        <input type="button" value="done" onclick="go(url, createData()); cal.update(url)">
+      <div class="twelve columns" style="margin-top:100px">
+        <input class="u-full-width" type="button" value="grow" onclick="go(url, createData()); cal.update(url)">
         <!-- <input type="button" value="done" onclick="go(url, createData());"> -->
       </div>
     </div>
@@ -114,6 +143,7 @@
 <!-- End Document -->
 </body>
 
+<!--
 <style>
 .container {
  margin-top: 50px;
@@ -137,4 +167,6 @@
  text-decoration: underline;
 }
 </style>
+-->
 </html>
+
