@@ -32,91 +32,87 @@
   <script src="https://kit.fontawesome.com/a1763a7d6f.js" crossorigin="anonymous"></script>
 
 
-  <script>
-
-    var url = conf.url
-
-    function epoch() {
-      var date = new Date() ;
-      return Math.floor( date.getTime() / 1000 ) ;
-    }
-
-    function createData() {
-      var data = '{"' + epoch() + '"' + ':1}'
-      return JSON.parse(data);
-    }
-
-    function go(url, data) {
-      fetch(url, {
-        method: 'PATCH', 
-        body: JSON.stringify(data), 
-        //body: data, 
-        headers:{ 'Content-Type': 'application/json' }
-      }).then(res => res.json())
-      .then(response => console.log('Success:', JSON.stringify(response)))
-      .catch(error => console.error('Error:', error));
-    }
-
-    const d = new Date();
-    let threeMonthAgo = d.setMonth(d.getMonth() - 2);
-
-  </script>
 
 </head>
 <body>
 
-<div class="menu">
-  <div class="left-content"><img src="img/kusa-h40.png"></img></div>
-  <div class="right-content"><i class="fas fa-bars" style="font-size: 2em"></i></div>
-</div>
-
+<div class="container" style="margin-top: 20px">
+  <div class="menu">
+    <div class="left-content"><img src="img/kusa-h40.png"></img></div>
+    <div class="right-content"><i class="fas fa-bars" style="font-size: 2em"></i></div>
+  </div>
 </div><!-- container -->
 
+
   <!-- Primary Page Layout -->
-  <div class="container">
-    <div class="row">
-      <div class="twelve columns">
-        <div id="cal-heatmap"></div>
-          <script type="text/javascript">
+<div class="container" style="margin-top: 50px">
+  <div class="row">
+    <div class="twelve columns">
+      <div id="cal-heatmap"></div>
 
-          	var cal = new CalHeatMap();
-	          cal.init({
-              start: threeMonthAgo,
-              range: 3,
-              cellSize: 15,
-              domain: "month",
-              domainGutter: 0,
-              domainMargin: 0,
-              weekStartOnMonday: false,
-/*
-              verticalOrientation: true,
-              legendOrientation: "vertical",
-              legendHorizontalPosition: "right",
-              legendVerticalPosition: "center",
-              legendMargin: [0, 0, 0, 20],
-*/
-              //data: "date.json",
-              data: url,
-              tooltip: true
-            });
-
-          </script>
-      </div>
-      <div class="twelve columns" style="margin-top:100px">
+    </div>
+    <div class="twelve columns" style="margin-top:100px">
         <input class="u-full-width" type="button" value="grow" onclick="go(url, createData()); cal.update(url)">
         <!-- <input type="button" value="done" onclick="go(url, createData());"> -->
       </div>
     </div>
   </div>
 
-<!-- End Document -->
 </body>
 
-<style>
+<script type="text/javascript">
 
-.container {
- margin-top: 50px;
+var url = conf.url
+
+function epoch() {
+  var date = new Date() ;
+  return Math.floor( date.getTime() / 1000 ) ;
 }
+
+function createData() {
+  var data = '{"' + epoch() + '"' + ':1}'
+  return JSON.parse(data);
+}
+
+function go(url, data) {
+  fetch(url, {
+    method: 'PATCH', 
+    body: JSON.stringify(data), 
+    //body: data, 
+    headers:{ 'Content-Type': 'application/json' }
+  }).then(res => res.json())
+  .then(response => console.log('Success:', JSON.stringify(response)))
+  .catch(error => console.error('Error:', error));
+}
+
+const d = new Date();
+let threeMonthAgo = d.setMonth(d.getMonth() - 2);
+
+
+var cal = new CalHeatMap();
+cal.init({
+  start: threeMonthAgo,
+  range: 3,
+  cellSize: 15,
+  domain: "month",
+  domainGutter: 0,
+  domainMargin: 0,
+  weekStartOnMonday: false,
+/*
+  verticalOrientation: true,
+  legendOrientation: "vertical",
+  legendHorizontalPosition: "right",
+  legendVerticalPosition: "center",
+  legendMargin: [0, 0, 0, 20],
+*/
+  //data: "date.json",
+  data: url,
+  tooltip: true
+});
+
+</script>
+
+<style>
 
 /* menu */
 .menu {
@@ -128,7 +124,7 @@
 .left-content {
   width: 10%;
   display: table-cell;
-  padding: 20px 20px 20px 20px;
+  /* padding: 20px 20px 20px 20px; */
 }
 
 .right-content {
@@ -136,9 +132,10 @@
   display: table-cell;
   text-align : right;
   vertical-align: middle;
-  padding: 20px 20px 20px 20px;
+  /* padding: 20px 20px 20px 20px; */
 }
 
 </style>
+
 </html>
 
