@@ -1,36 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <!-- Basic Page Needs -->
   <meta charset="utf-8">
   <title>KUSA</title>
   <meta name="description" content="">
   <meta name="author" content="">
-
   <!-- Mobile Specific Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <!-- FONT -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
   <!-- CSS -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
-
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="images/favicon.png">
-
   <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css" />
-
   <!-- Application configuration -->
   <script type="text/javascript" src=".app_config.js"></script>
-
   <!-- Fontawsome -->
   <script src="https://kit.fontawesome.com/a1763a7d6f.js" crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -39,9 +30,9 @@
 <div class="container" style="margin-top: 20px">
   <div class="menu">
     <div class="left-content"><img src="img/kusa-h40.png"></img></div>
-    <div class="right-content"><a href="#open-modal"><i class="fas fa-bars" style="font-size: 2em"></i></div>
+    <div class="right-content"><a href="#open-modal"><i class="fas fa-bars" style="font-size: 2em"></i></a></div>
   </div>
-</div><!-- container -->
+</div>
 
 
 <!-- Primary Page Layout -->
@@ -55,27 +46,25 @@
 </div>
 
 <!-- Modal -->
-<!--
-<div class="container">
-  <div class="interior">
-    <a class="btn" href="#open-modal">👋 Basic CSS-Only Modal</a>
-  </div>
-</div>
--->
-
 <div id="open-modal" class="modal-window">
 <div class="container">
   <div>
     <a href="#" title="Close" class="modal-close"><i class="fas fa-times" style="font-size: 1.5em"></i></a>
-    <h1>Setting</h1>
-    <div>A CSS-only modal based on the :target pseudo-class. Hope you find it helpful.</div>
+    <h4>Setting</h4>
+    <label for="account"><i class="fas fa-user"></i> Create your account:</label>
+    <input class="u-full-width" type="email" placeholder="Your account name" id="account">
+    <label for="challenge"><i class="fas fa-plus"></i> Add your challenge:</label>
+    <input class="u-full-width" type="email" placeholder="Your challenge" id="challenge">
   </div>
 </div>
 </div>
 
 </body>
 
+
 <script type="text/javascript">
+
+localStorage.userId = "user-a"
 
 var url = conf.url
 
@@ -178,6 +167,7 @@ cal.init({
   padding: 2em;
   background: #ffffff;
 }
+/*
 .modal-window header {
   font-weight: bold;
 }
@@ -185,6 +175,7 @@ cal.init({
   font-size: 150%;
   margin: 0 0 15px;
 }
+*/
 
 .modal-close {
   color: #aaa;
