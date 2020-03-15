@@ -47,14 +47,10 @@
   <!-- Primary Page Layout -->
 <div class="container" style="margin-top: 50px">
   <div class="row">
-    <div class="twelve columns">
-      <div id="cal-heatmap"></div>
-
-    </div>
+    <div class="twelve columns"><div id="cal-heatmap"></div></div>
     <div class="twelve columns" style="margin-top:100px">
-        <input class="u-full-width" type="button" value="grow" onclick="go(url, createData()); cal.update(url)">
-        <!-- <input type="button" value="done" onclick="go(url, createData());"> -->
-      </div>
+      <button class="u-full-width" onclick="go(url, createData()); cal.update(url)"><i class="fas fa-tint"></i> grow!</button>
+    </div>
     </div>
   </div>
 
