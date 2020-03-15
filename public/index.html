@@ -31,28 +31,47 @@
   <!-- Fontawsome -->
   <script src="https://kit.fontawesome.com/a1763a7d6f.js" crossorigin="anonymous"></script>
 
-
-
 </head>
+
 <body>
 
+<!-- Menu -->
 <div class="container" style="margin-top: 20px">
   <div class="menu">
     <div class="left-content"><img src="img/kusa-h40.png"></img></div>
-    <div class="right-content"><i class="fas fa-bars" style="font-size: 2em"></i></div>
+    <div class="right-content"><a href="#open-modal"><i class="fas fa-bars" style="font-size: 2em"></i></div>
   </div>
 </div><!-- container -->
 
 
-  <!-- Primary Page Layout -->
+<!-- Primary Page Layout -->
 <div class="container" style="margin-top: 50px">
   <div class="row">
     <div class="twelve columns"><div id="cal-heatmap"></div></div>
     <div class="twelve columns" style="margin-top:100px">
       <button class="u-full-width" onclick="go(url, createData()); cal.update(url)"><i class="fas fa-tint"></i> grow!</button>
     </div>
-    </div>
   </div>
+</div>
+
+<!-- Modal -->
+<!--
+<div class="container">
+  <div class="interior">
+    <a class="btn" href="#open-modal">👋 Basic CSS-Only Modal</a>
+  </div>
+</div>
+-->
+
+<div id="open-modal" class="modal-window">
+<div class="container">
+  <div>
+    <a href="#" title="Close" class="modal-close"><i class="fas fa-times" style="font-size: 1.5em"></i></a>
+    <h1>Setting</h1>
+    <div>A CSS-only modal based on the :target pseudo-class. Hope you find it helpful.</div>
+  </div>
+</div>
+</div>
 
 </body>
 
@@ -110,7 +129,7 @@ cal.init({
 
 <style>
 
-/* menu */
+/* Menu */
 .menu {
   width: 100%;
   /* background-color: gray; */
@@ -129,6 +148,57 @@ cal.init({
   text-align : right;
   vertical-align: middle;
   /* padding: 20px 20px 20px 20px; */
+}
+
+/* Modal */
+.modal-window {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.75);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+.modal-window:target {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-window > div {
+  width: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  background: #ffffff;
+}
+.modal-window header {
+  font-weight: bold;
+}
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+.modal-close:hover {
+  color: black;
 }
 
 </style>
