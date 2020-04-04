@@ -15,109 +15,111 @@
   <link rel="stylesheet" href="css/skeleton.css">
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="img/kusa-h40.png">
+  <!-- cal-heatmap.js
   <script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
   <script type="text/javascript" src="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css" />
+  -->
   <!-- Application configuration -->
   <script type="text/javascript" src=".app_config.js"></script>
   <!-- Fontawsome -->
   <script src="https://kit.fontawesome.com/a1763a7d6f.js" crossorigin="anonymous"></script>
+  <!-- Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
 
+<div id="app">
+
 <!-- Menu -->
 <div class="container" style="margin-top: 40%">
   <p style="text-align: center;"><img src="img/kusa-h60.png"></img><p>
-  <form style="margin-top: 5em">
-    <input class="u-full-width" type="email" placeholder="Login account">
-    <input class="u-full-width" type="password" placeholder="Password">
-    <input class="u-full-width button-primary" type="submit" value="Go to your yard">
-  </form>
+  <input v-model="email" class="u-full-width" type="email" placeholder="Login account">
+  <input v-model="password" class="u-full-width" type="password" placeholder="Password">
+  <input v-on:click="signIn" class="u-full-width button-primary" type="submit" value="Go to your yard">
+  <input v-on:click="signUp" class="u-full-width" type="submit" value="Sign up">
+  <input v-on:click="signOut" class="u-full-width" type="submit" value="Sign out">
+  <pre><code>{{ message }}</code></pre>
+  <pre><code>{{ currentUser }}</code></pre>
 </div>
 
-</body>
+</div>
 
+<!-- Insert this script at the bottom of the HTML, but before you use any Firebase services -->
+<!-- Add the entire Firebase JavaScript SDK. Replace when go for production -->
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase.js"></script>
 
-<!--
-<style>
+<script>
 
-/* Menu */
-.menu {
-  width: 100%;
-  /* background-color: gray; */
-  display: table;
-}
-
-.left-content {
-  width: 10%;
-  display: table-cell;
-  /* padding: 20px 20px 20px 20px; */
-}
-
-.right-content {
-  width: 90%;
-  display: table-cell;
-  text-align : right;
-  vertical-align: middle;
-  /* padding: 20px 20px 20px 20px; */
-}
-
-/* Modal */
-.modal-window {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.75);
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s;
-}
-.modal-window:target {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-.modal-window > div {
-  width: 90%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 2em;
-  background: #ffffff;
-}
+  var firebaseConfig = conf.fb-conf;
 /*
-.modal-window header {
-  font-weight: bold;
-}
-.modal-window h1 {
-  font-size: 150%;
-  margin: 0 0 15px;
-}
+  // Firebase
+  var firebaseConfig = {
+    apiKey: "AIzaSyDYCIOJ3n9HySTttTAmnFSuyb_HkuwDnB4",
+    authDomain: "kusa-2b1ce.firebaseapp.com",
+    databaseURL: "https://kusa-2b1ce.firebaseio.com",
+    projectId: "kusa-2b1ce",
+    storageBucket: "kusa-2b1ce.appspot.com",
+    messagingSenderId: "753153939391",
+    appId: "1:753153939391:web:bb63a5b81f79125a8a730a",
+    measurementId: "G-ZK9PE7665C"
+  };
 */
+  firebase.initializeApp(conf.fbc);
+  //firebase.initializeApp(firebaseConfig);
+  //firebase.analytics();
 
-.modal-close {
-  color: #aaa;
-  line-height: 50px;
-  font-size: 80%;
-  position: absolute;
-  right: 0;
-  text-align: center;
-  top: 0;
-  width: 70px;
-  text-decoration: none;
-}
-.modal-close:hover {
-  color: black;
-}
+  // Vue
+  var app = new Vue({
+    el: '#app',
+    data () {
+      return {
+        email: '',
+        password: '',
+        message: '',
+        currentUser: ''
+      }
+    },
+    methods: {
+      signIn: function () {
+        app.message = ''; console.log('sign-in pressed');
 
-</style>
--->
+        firebase.auth().signInWithEmailAndPassword(app.email, app.password).catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+
+          app.message = error.message;
+          console.log(error.message);
+
+        }).then(function() {
+          app.currentUser = firebase.auth().currentUser;
+        });
+      },
+      signUp: function () {
+        app.message = ''; console.log('sign-up pressed');
+        firebase.auth().createUserWithEmailAndPassword(this.email, this.password).catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+
+          app.message = error.message;
+          console.log(error);
+        }).then(function() {
+          app.currentUser = firebase.auth().currentUser;
+        });
+      },
+      signOut: function () {
+        firebase.auth().signOut().then(function() {
+          app.currentUser = firebase.auth().currentUser;
+        });
+      }
+    }
+  })
+</script>
+
+
+
+</body>
 
 </html>
 
